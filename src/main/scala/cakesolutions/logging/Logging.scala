@@ -1,6 +1,6 @@
 package cakesolutions
 
-package actor
+package logging
 
 import akka.actor.Actor
 import akka.actor.ActorLogging
