@@ -42,7 +42,7 @@ trait Logging extends Actor with ActorLogging with ExceptionLogging {
    * We log unhandled messages
    */
   override def unhandled(msg: Any) = {
-    log.info(s"${getClass.getSimpleName} received the unhandled message $msg")
+    log.warning(s"${getClass.getSimpleName} received the unhandled message $msg")
     super.unhandled(msg)
   }
 
