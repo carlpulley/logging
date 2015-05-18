@@ -39,6 +39,14 @@ trait Logging extends Actor with ActorLogging with ExceptionLogging {
   }
   
   /**
+   * We intercept and DEBUG log all received messages
+   */
+  override def aroundReceive(receive: Actor.Receive, msg: Any) = {
+    log.debug(s"${getClass.getSimpleName} received $msg from ${sender()}")
+    super.aroundReceive(receive, msg)
+  }
+
+  /**
    * We log unhandled messages
    */
   override def unhandled(msg: Any) = {
