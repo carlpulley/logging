@@ -20,7 +20,7 @@ trait FSMLogging[State, Data] extends LoggingFSM[State, Data] with Logging {
    * @param msg   (optional) the message that this actor was processing when it restarted
    */
   override def preRestart(cause: Throwable, msg: Option[Any]) = {
-    log.debug(s"Restarting ${getClass.getSimpleName}: $logDepth events from logging trace buffers: $getLog")
+    log.debug(s"Restarting ${getClass.getSimpleName}: $logDepth events from logging trace buffers: ${getLog.mkString("\n  ", ",\n  ", "")}")
     super.preRestart(cause, msg)
   }
 
@@ -28,7 +28,7 @@ trait FSMLogging[State, Data] extends LoggingFSM[State, Data] with Logging {
    * For FSM actors, we also dump our trace buffers when stopped.
    */
   override def postStop() = {
-    log.debug(s"Stopping ${getClass.getSimpleName}: $logDepth events from logging trace buffers: $getLog")
+    log.debug(s"Stopping ${getClass.getSimpleName}: $logDepth events from logging trace buffers: ${getLog.mkString("\n  ", ",\n  ", "")}")
     super.postStop()
   }
 
