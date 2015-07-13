@@ -1,6 +1,6 @@
 package cakesolutions
 
-import org.apache.commons.lang3.exception.ExceptionUtils
+import java.io.{PrintWriter, StringWriter}
 
 /**
  * Trait that adds in utility functions for aiding the logging of exception messages.
@@ -13,6 +13,9 @@ trait ExceptionLogging {
    * @return      the string representation of this exception
    */
   def exceptionString(cause: Throwable): String = {
-    ExceptionUtils.getStackTrace(cause)
+    val sw = new StringWriter()
+    val pw = new PrintWriter(sw, true)
+    cause.printStackTrace(pw)
+    sw.getBuffer.toString
   }
 }
